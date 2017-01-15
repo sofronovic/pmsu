@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardView="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardViewMeal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:elevation="3dp"
+        android:layout_margin="3dp"
+        cardView:cardCornerRadius="0dp"
+
+        >
+        <RelativeLayout
+            android:id="@+id/relativeMealCard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/mealCardImageView"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:padding="1dp"
+            android:src="@drawable/slika1"
+
+            />
+
+            <TextView
+                android:id="@+id/titleMealCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                android:padding="2dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="15dp"/>
+
+            <TextView
+                android:id="@+id/descriptionMealCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:padding="2dp"
+                android:layout_below="@id/titleMealCardView"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp" />
+
+            <TextView
+                android:id="@+id/priceMealCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:padding="2dp"
+                android:layout_below="@id/descriptionMealCardView"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                />
+
+
+            <!-- <TextView android:id="@+id/minutes"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="25 Minutes - Pay Online"
+                 android:padding="2dp"
+                 android:textColor="@color/white"
+                 android:textSize="15sp"
+                 android:layout_alignParentRight="true"
+                 android:layout_alignBaseline="@id/priceMealCardView"/>-->
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

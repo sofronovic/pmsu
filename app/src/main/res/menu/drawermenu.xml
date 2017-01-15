@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+
+    <item
+        android:title="Profile"
+        android:icon="@drawable/user"
+        android:id="@+id/drawerMenu_profile" />
+
+    <group android:id="@+id/drawerMenu_group">
+        <item
+            android:title="Contact"
+
+            android:icon="@drawable/message" />
+        <item
+            android:icon="@drawable/help"
+            android:title="Help" />
+    </group>
+
+    <group android:id="@+id/drawerMenu_group2">
+        <item
+            android:id="@+id/drawerMenuSettings"
+            android:title="Settings"/>
+    </group>
+</menu>

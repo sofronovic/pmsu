@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/restaurant_info_layout"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/res_info_imageView"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/photo1"/>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            >
+
+            <ImageView
+                android:id="@+id/res_info_closed"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="14dp"
+                android:src="@drawable/closed"
+                />
+
+            <ImageView
+                android:id="@+id/res_info_open"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="14dp"
+                android:src="@drawable/open2"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        >
+
+        <TextView
+            android:id="@+id/res_info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/faded"
+            android:textSize="31dp"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/res_info_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/lite_grey"
+            android:textSize="19sp"
+            android:layout_centerHorizontal="true"
+             />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/border_layout_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="@dimen/border_width"
+            android:layout_height="1dp"
+            android:foreground="#fbdedede"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/res_info_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/faded"
+            android:text="Indjija Sumadijska 0"
+            android:textSize="23sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:id="@+id/res_info_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monday-Sunday"
+            android:textSize="20sp"
+            android:textColor="@color/lite_grey"
+            android:layout_centerHorizontal="true"
+
+            />
+
+        <TextView
+            android:id="@+id/res_info_startHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:textColor="@color/faded"
+            android:padding="4dp"
+            android:layout_toEndOf="@+id/res_info_days"
+            android:layout_alignBaseline="@id/res_info_days"
+            android:layout_toRightOf="@+id/res_info_days" />
+
+        <TextView
+            android:id="@+id/res_info_endHour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:textColor="@color/faded"
+            android:padding="4dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignBaseline="@id/res_info_days"
+            android:layout_toRightOf="@id/res_info_startHour"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/border_layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="@dimen/border_width"
+            android:layout_height="1dp"
+            android:foreground="#fbdedede"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        >
+
+       <Button
+
+            android:id="@+id/email"
+            android:text="E-Mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@color/button_blue"
+            android:layout_alignParentEnd="true"
+           android:layout_alignParentRight="true"
+           android:layout_marginRight="15dp"/>
+
+        <Button android:id="@+id/call"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:background="@color/button_green"
+            android:text="Call"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            />
+
+        <Button
+            android:id="@+id/sms"
+            android:text="SMS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@color/button_red"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+         />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/border_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:foreground="#fbe9e9e9"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/site_static"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Our webiste"
+            android:textColor="@color/lite_grey"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            />
+
+        <TextView
+            android:id="@+id/res_info_site"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/faded"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            />
+
+        <TextView
+            android:id="@+id/facebook_static"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Like us on facebook"
+            android:textColor="@color/lite_grey"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_below="@id/site_static"
+            />
+
+        <TextView
+            android:id="@+id/res_info_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dostava 021"
+            android:textSize="20sp"
+            android:textColor="@color/faded"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/res_info_site"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/features"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Features"
+            android:textSize="20sp"
+            android:textColor="@color/button_red"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+
+        <ImageView
+            android:id="@+id/image_correct"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/coins"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/features"></ImageView>
+            <!--android:layout_toLeftOf="@id/delivery"-->/
+
+        <TextView
+            android:id="@+id/delivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Free delivery over 20$"
+            android:textSize="19sp"
+            android:textColor="@color/faded"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@id/features"
+            android:layout_toRightOf="@id/image_correct"/>
+
+        <ImageView
+            android:id="@+id/image_correct_2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/can"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/delivery" />
+            <!--android:layout_toLeftOf="@id/drink"-->/
+
+        <TextView
+            android:id="@+id/drink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Free drink every 3rd time"
+            android:textSize="20sp"
+            android:textColor="@color/faded"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@id/delivery"
+            android:layout_toRightOf="@id/image_correct_2"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/border_layout_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:foreground="#fbe9e9e9"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/google_map"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"/>
+
+    </FrameLayout>
+</LinearLayout>
+</ScrollView>
