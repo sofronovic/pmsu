@@ -10,18 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import sf22_2014.android_projekat_sf22_2014.Fragment.MapFragment;
-import sf22_2014.android_projekat_sf22_2014.Fragment.RestaurantsFragment;
-import sf22_2014.android_projekat_sf22_2014.Interface.RecyclerItemClickListener;
 import sf22_2014.android_projekat_sf22_2014.Model.Restaurant;
 import sf22_2014.android_projekat_sf22_2014.R;
 import sf22_2014.android_projekat_sf22_2014.RestaurantActivity;
-
-import static sf22_2014.android_projekat_sf22_2014.R.id.recyclerView;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.MyViewHolder> {
 
@@ -68,11 +62,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
             this.restaurantList = restaurantList;
             this.mContext = mContext;
 
-            itemView.setOnClickListener(this); //za svaki klik poziva se onClick metoda
-
             title = (TextView) itemView.findViewById(R.id.card_title);
             description = (TextView) itemView.findViewById(R.id.card_description);
             imageView = (ImageView) itemView.findViewById(R.id.thumbnail);
+
+            itemView.setOnClickListener(this); //za svaki klik poziva se onClick metoda
+            imageView.setOnClickListener(this);
 
             Typeface font = Typeface.createFromAsset(mContext.getAssets(), "steelfish rg.ttf");
             title.setTypeface(font);

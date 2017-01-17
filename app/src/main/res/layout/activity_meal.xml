@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="sf22_2014.android_projekat_sf22_2014.MealActivity">
+
+    <RelativeLayout
+        android:id="@+id/activity_meal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/meal_info_image"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:src="@drawable/slika1"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"/>
+
+        <RelativeLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/meal_info_image"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/meal_info_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Naziv jela "
+                android:textColor="@color/faded"
+                android:textSize="31dp"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/description_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/title_layout">
+
+            <TextView
+                android:id="@+id/meal_info_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ASDASDASDASDASDAS"
+                android:textColor="@color/lite_grey"
+                android:textSize="19sp"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/meal_info_price_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/description_layout"
+            android:background="#e0e0e0">
+
+            <TextView
+                android:id="@+id/meal_info_price_static"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price: "
+                android:textSize="19sp"
+                android:textColor="@color/faded"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/meal_info_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="@color/button_green"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/meal_info_price_static"/>
+
+            <TextView
+                android:id="@+id/meal_info_ready"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ready in: 30 minutes"
+                android:textSize="19sp"
+                android:textColor="@color/faded"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/meal_info_order_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_below="@id/meal_info_price_layout">
+
+            <Button
+                android:id="@+id/meal_info_order_button"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:background="@color/button_green"
+                android:text="Order"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</ScrollView>

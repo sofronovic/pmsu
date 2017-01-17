@@ -1,6 +1,7 @@
 package sf22_2014.android_projekat_sf22_2014.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import sf22_2014.android_projekat_sf22_2014.MealActivity;
 import sf22_2014.android_projekat_sf22_2014.Model.Meal;
 import sf22_2014.android_projekat_sf22_2014.R;
 
@@ -48,7 +50,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolderMe
         return mealList.size();
     }
 
-    public class MyViewHolderMeal extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class MyViewHolderMeal extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView title, description , price, priceStatic;
         public ImageView imageView;
@@ -60,15 +62,14 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolderMe
             this.mealList = mealList;
             this.mContext = mContext;
 
-            itemView.setOnClickListener(this);
-
             title = (TextView) itemView.findViewById(R.id.titleMealCardView);
             description = (TextView) itemView.findViewById(R.id.descriptionMealCardView);
             price = (TextView) itemView.findViewById(R.id.priceMealCardView);
             imageView = (ImageView) itemView.findViewById(R.id.mealCardImageView);
-/*
-            priceStatic =(TextView) itemView.findViewById(R.id.priceStatic);
-*/
+
+            itemView.setOnClickListener(this);
+            imageView.setOnClickListener(this);
+
             Typeface font = Typeface.createFromAsset(mContext.getAssets(), "steelfish rg.ttf");
             title.setTypeface(font);
             description.setTypeface(font);
@@ -80,6 +81,13 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolderMe
         public void onClick(View view) {
             int position = getAdapterPosition();
             Meal meal = this.mealList.get(position);
+            Intent intent = new Intent(this.mContext, MealActivity.class);
+            intent.putExtra("meal_id", meal.getId());
+            intent.putExtra("meal_name", meal.getName());
+            intent.putExtra("meal_desc", meal.getDescription());
+            intent.putExtra("meal_price", meal.getPrice());
+            this.mContext.startActivity(intent);
         }
+
     }
 }
