@@ -1,7 +1,5 @@
 package sf22_2014.android_projekat_sf22_2014.Fragment;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -47,7 +45,7 @@ public class MealsFragment extends Fragment {
         return view;
     }
 
-    private void prepareMeals() {
+   /* private void prepareMeals() {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.meal1);
         Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.meal5);
@@ -75,5 +73,5 @@ public class MealsFragment extends Fragment {
         mealList.add(m9);
 
         mealAdapter.notifyDataSetChanged();
-    }
+    }*/
 }
