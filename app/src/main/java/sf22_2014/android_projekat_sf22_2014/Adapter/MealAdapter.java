@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sf22_2014.android_projekat_sf22_2014.MealActivity;
@@ -19,11 +20,13 @@ import sf22_2014.android_projekat_sf22_2014.R;
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolderMeal> {
 
     private Context mContext;
-    private List<Meal> mealList;
+    private List<Meal> mealList = new ArrayList<>();
+    private LayoutInflater inflater;
 
-    public MealAdapter(Context mContext, List<Meal> mealList){
+    public MealAdapter(Context mContext, List<Meal> mealList1){
         this.mContext = mContext;
-        this.mealList = mealList;
+        this.mealList = mealList1;
+        inflater = inflater.from(mContext);
     }
 
     @Override
@@ -40,7 +43,6 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolderMe
         holder.title.setText(meal.getName());
         holder.description.setText(meal.getDescription());
         holder.imageView.setImageBitmap(meal.getPhoto());
-
         holder.price.setText(String.valueOf(meal.getPrice()));
 
     }

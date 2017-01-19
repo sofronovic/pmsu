@@ -1,13 +1,9 @@
 package sf22_2014.android_projekat_sf22_2014.Fragment;
 
-import android.content.res.AssetManager;
+
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,54 +14,43 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import sf22_2014.android_projekat_sf22_2014.Adapter.RestaurantAdapter;
+import sf22_2014.android_projekat_sf22_2014.Database.MySQLiteHelper;
 import sf22_2014.android_projekat_sf22_2014.Model.Restaurant;
 import sf22_2014.android_projekat_sf22_2014.R;
-
 
 
 public class RestaurantsFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private TextView textView;
     private RestaurantAdapter adapter;
     private List<Restaurant> restaurantList;
+    private MySQLiteHelper dbHelper;
 
     @Override
-    public View onCreateView(LayoutInflater layoutInflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater layoutInflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = layoutInflater.inflate(R.layout.restaurants_layout, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
-        restaurantList = new ArrayList<>();
-        adapter = new RestaurantAdapter(getContext(), restaurantList);
+        dbHelper = MySQLiteHelper.getInstance(getContext().getApplicationContext());
+
+        adapter = new RestaurantAdapter(getContext(), dbHelper.getAllUser());
+
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
         recyclerView.setLayoutManager(mLayoutManager);
-        /*recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));*/
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
         recyclerView.setAdapter(adapter);
 
-//        textView = (TextView) view.findViewById(R.id.card_title);
-//        Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "minimal.otf");
-//        textView.setTypeface(font);
-
-        prepareRestaurants();
-
         return view;
-
     }
 
-    private void prepareRestaurants(){
+    private void prepareRestaurants() {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.res1);
         Bitmap bitmap1 = BitmapFactory.decodeResource(getResources(), R.drawable.res2);
@@ -74,8 +59,9 @@ public class RestaurantsFragment extends Fragment {
         Bitmap bitmap4 = BitmapFactory.decodeResource(getResources(), R.drawable.res5);
         Bitmap bitmap5 = BitmapFactory.decodeResource(getResources(), R.drawable.res6);
 
-        Restaurant test = new Restaurant(1, "Test", "Test Opis", bitmap, "Test Site", 7, 24, "0653552001", "sofronovicn@gmail.com");
-        restaurantList.add(test);
+/*        Restaurant test = new Restaurant(1, "Test", "Test Opis", bitmap, "Test Site", 7, 24, "0653552001", "sofronovicn@gmail.com",
+                createRestaurantAddress("Bulevar Mihajla Pupina", "21000", "Serbia"));*/
+  /*      restaurantList.add(test);*/
         Restaurant r = new Restaurant(1, "Chinese food house", "Kineska hrana", bitmap1, "asdasd", 9, 24, "0653552001", "sofronovicn@gmail.com");
         Restaurant r1 = new Restaurant(2, "Palermo Indjija", "Brza hrana", bitmap2, 07, 24, "asdasda");
         Restaurant r2 = new Restaurant(3, "Fast Food Petica", "Kod Spome sa rostilja", bitmap3);
@@ -98,5 +84,12 @@ public class RestaurantsFragment extends Fragment {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-
+ /*   public String createRestaurantAddress(String street, String postalCode, String country) {
+        String address = new Address(Locale.getDefault());
+        address.setFeatureName(street);
+        address.setPostalCode(postalCode);
+        address.setCountryName(country);
+        return address;
+    }
+*/
 }

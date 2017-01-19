@@ -1,68 +1,55 @@
 package sf22_2014.android_projekat_sf22_2014.Fragment;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-
-import java.sql.Time;
-import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
-
-import android.icu.text.DateFormat;
-
-import java.text.SimpleDateFormat;
-
-import android.icu.util.TimeZone;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.media.Image;
 import android.net.Uri;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.w3c.dom.Text;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import sf22_2014.android_projekat_sf22_2014.R;
 
-public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallback, LocationListener {
+public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallback, LocationListener,
+                GoogleMap.OnMarkerClickListener {
 
     private TextView title, description, days, address, startHour, endHour, site,
             siteStatic, facebook, faceBookstatic, features, drink, delivery;
     private Button button, buttonSMS, buttonEmail;
     private ImageView openImage, closedImage;
+    private String naslov;
 
     private Date date;
     private Date startCompare;
     private Date endCompare;
     private int start;
     private int end;
-
+    private String restaurantAddress;
     private MapView mMapView;
     private GoogleMap mGoogleMap;
     private LocationManager locationManager;
@@ -70,6 +57,7 @@ public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallba
     final String inputFormat = "HH:mm";
     SimpleDateFormat inputParser = new SimpleDateFormat(inputFormat);
 
+    private Marker restaurantMarker;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.restaurant_info_layout, container, false);
@@ -94,24 +82,27 @@ public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallba
         closedImage = (ImageView) view.findViewById(R.id.res_info_closed);
 
 
-        String naslov = getActivity().getIntent().getStringExtra("res_title");
+        naslov = getActivity().getIntent().getStringExtra("res_title");
         String opis = getActivity().getIntent().getStringExtra("res_description");
         String url = getActivity().getIntent().getStringExtra("res_site");
         start = getActivity().getIntent().getIntExtra("res_start_hour", 0);
         end = getActivity().getIntent().getIntExtra("res_end_hour", 0);
         final String phone = getActivity().getIntent().getStringExtra("res_phone");
         final String email = getActivity().getIntent().getStringExtra("res_email");
+        restaurantAddress = getActivity().getIntent().getStringExtra("res_address");
 
         title.setText(naslov);
         description.setText(opis);
         site.setText(url);
         startHour.setText("from: " + String.valueOf(start) + "h");
         endHour.setText("to: " + String.valueOf(end) + "h");
+        address.setText(restaurantAddress);
 
         mMapView = (MapView) view.findViewById(R.id.google_map);
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
         mMapView.getMapAsync(this);
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +135,7 @@ public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallba
 
                 i.setType("plain/text");
                 i.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
-                i.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                i.putExtra(Intent.EXTRA_SUBJECT, "Order");
                 startActivity(i);
             }
         });
@@ -154,13 +145,6 @@ public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallba
 
         setFont();
         return view;
-    }
-
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        mGoogleMap = googleMap;
     }
 
     public void setFont() {
@@ -227,15 +211,35 @@ public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallba
         }
     }
 
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        mGoogleMap = googleMap;
+
+        Geocoder gc = new Geocoder(getContext());
+        try {
+            List<Address> list = gc.getFromLocationName(restaurantAddress, 1);
+            Address add = list.get(0);
+            String locality = add.getAddressLine(0);
+            double lat = add.getLatitude();
+            double lng = add.getLongitude();
+            LatLng latLng = new LatLng(lat, lng);
+
+            restaurantMarker = mGoogleMap.addMarker(new MarkerOptions().position(latLng).title(naslov));
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        mGoogleMap.setOnMarkerClickListener(this);
+    }
+
     @Override
     public void onLocationChanged(Location location) {
 
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 10);
-        mGoogleMap.animateCamera(cameraUpdate);
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            locationManager.removeUpdates(this);
-        }
+
     }
 
     @Override
@@ -251,5 +255,10 @@ public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallba
     @Override
     public void onProviderDisabled(String s) {
 
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        return false;
     }
 }

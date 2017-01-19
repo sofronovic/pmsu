@@ -2,10 +2,9 @@ package sf22_2014.android_projekat_sf22_2014.Fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import sf22_2014.android_projekat_sf22_2014.Adapter.MealAdapter;
+import sf22_2014.android_projekat_sf22_2014.Database.MySQLiteHelper;
 import sf22_2014.android_projekat_sf22_2014.Model.Meal;
 import sf22_2014.android_projekat_sf22_2014.R;
 
@@ -27,22 +26,24 @@ public class MealsFragment extends Fragment {
     private TextView textView;
     private List<Meal> mealList;
     private MealAdapter mealAdapter;
+    private MySQLiteHelper dbHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.meals_layout, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewMeals);
+        dbHelper = MySQLiteHelper.getInstance(getContext().getApplicationContext());
 
-        mealList = new ArrayList<>();
-        mealAdapter = new MealAdapter(getContext(), mealList);
+        mealAdapter = new MealAdapter(getContext(), dbHelper.getAllMeal());
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mealAdapter);
 
+/*
         prepareMeals();
-
+*/
         return view;
     }
 

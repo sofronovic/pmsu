@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sf22_2014.android_projekat_sf22_2014.Model.Restaurant;
@@ -19,21 +20,26 @@ import sf22_2014.android_projekat_sf22_2014.RestaurantActivity;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.MyViewHolder> {
 
+    //private Cursor cursor;
     private Context mContext;
-    private List<Restaurant> restaurantList;
+    private List<Restaurant> restaurantList = new ArrayList<>();
+    private LayoutInflater inflater;
 
-
-    public RestaurantAdapter(Context mContext, List<Restaurant> restaurantList){
+    public RestaurantAdapter(Context mContext, List<Restaurant> restaurantList1){
         this.mContext = mContext;
-        this.restaurantList = restaurantList;
+        this.restaurantList = restaurantList1;
+        inflater = LayoutInflater.from(mContext);
     }
 
     @Override
     public RestaurantAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+        View itemView = inflater.from(parent.getContext())
                 .inflate(R.layout.restaurant_card, parent, false);
-
+        MyViewHolder viewHolder = new MyViewHolder(itemView, mContext, restaurantList);
+        return viewHolder;
+/*
         return new MyViewHolder(itemView, mContext, restaurantList);
+*/
     }
 
     @Override
@@ -88,6 +94,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
             intent.putExtra("res_end_hour", restaurant.getEndHour());
             intent.putExtra("res_phone", restaurant.getPhone());
             intent.putExtra("res_email", restaurant.getEmail());
+            intent.putExtra("res_address", restaurant.getAddress());
             this.mContext.startActivity(intent);
             Log.d("RestaurantAdapter", "OnClick Recycler View");
 

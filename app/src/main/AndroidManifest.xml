@@ -13,6 +13,8 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_DATABASE" />
+    <uses-permission android:name="android.permission.WRITE_DATABASE" />
 
     <permission
         android:name="com.example.permission.MAPS_RECEIVE"
@@ -44,12 +46,25 @@
         <activity android:name=".MealActivity"/>
         <activity android:name=".PreferencesActivity"/>
 
+        <activity android:name="sf22_2014.android_projekat_sf22_2014.Database.AndroidDatabaseManager"
+            android:theme="@style/Theme.AppCompat.Light"/>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyATsIqE1K-3OikifDmXEEGVvPLc1xA3hKA" />
+
+        <provider
+            android:authorities="sf22_2014.android_projekat_sf22_2014"
+            android:name="sf22_2014.android_projekat_sf22_2014.Database.MyContentProvider"
+            android:exported="true"
+            android:readPermission="sf22_2014.android_projekat_sf22_2014.READ_DATABASE"
+            android:writePermission="sf22_2014.android_projekat_sf22_2014.WRITE_DATABASE"
+            />
+        
     </application>
+    
 
 </manifest>

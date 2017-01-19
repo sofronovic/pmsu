@@ -1,20 +1,18 @@
 package sf22_2014.android_projekat_sf22_2014.Model;
 
-
 import android.graphics.Bitmap;
-import android.location.Address;
 
+import java.io.Serializable;
 import java.util.List;
 
+public class Restaurant implements Serializable{
 
-public class Restaurant {
-
-    private int id;
+    private long id;
     private String name;
     private String description;
     private Bitmap smallPhoto;
     private Bitmap largePhoto;
-    private Address address;
+    private String address;
     private int startHour;
     private int endHour;
     private int endMinute;
@@ -23,7 +21,6 @@ public class Restaurant {
     private String email;
     private String url;
     private List<Meal> meals;
-
 
     public Restaurant(String name, String description, Bitmap smallPhoto, int startHour, String url) {
         this.name = name;
@@ -64,9 +61,22 @@ public class Restaurant {
         this.phone = phone;
         this.email = email;
     }
+    public Restaurant(int id, String name, String description, Bitmap smallPhoto, String url, int startHour, int endHour,
+                      String phone, String email, String address) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.smallPhoto = smallPhoto;
+        this.url = url;
+        this.startHour = startHour;
+        this.endHour = endHour;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+    }
 
     public Restaurant(int id, List<Meal> meals, String url, String email, String phone, int startMinute,
-                      int endMinute, int endHour, int startHour, Address address, Bitmap largePhoto,
+                      int endMinute, int endHour, int startHour, String address, Bitmap largePhoto,
                       Bitmap smallPhoto, String description, String name) {
         this.id = id;
         this.meals = meals;
@@ -98,12 +108,27 @@ public class Restaurant {
         this.url = url;
 }
 
+    public Restaurant() {
 
-    public int getId() {
+    }
+
+    public Restaurant(long id, String name, String description, int s, int e, String a, String b, String c) {
+        this.id = id;
+        this.name= name;
+        this.description = description;
+        this.startHour = s;
+        this.endHour = e;
+        this.phone = a;
+        this.email = b;
+        this.url = c;
+    }
+
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -139,11 +164,11 @@ public class Restaurant {
         this.largePhoto = largePhoto;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 

@@ -4,66 +4,58 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context="sf22_2014.android_projekat_sf22_2014.MainActivity">
 
     <android.support.v7.widget.Toolbar
-
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/white"
-        android:id="@+id/toolbar"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textSize="@dimen/title_font_size"
-            android:textStyle="bold"
-            android:layout_marginBottom="5dp"
             android:layout_gravity="center"
-            android:textColor="@color/black"
+            android:layout_marginBottom="5dp"
             android:layout_marginTop="@dimen/title_margin"
-            />
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title_font_size"
+            android:textStyle="bold" />
 
-        </android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        >
-
-
+        android:gravity="center">
     </LinearLayout>
 
     <android.support.v4.widget.DrawerLayout
-
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/drawerLayout">
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/containerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
-
-    <android.support.design.widget.NavigationView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:id="@+id/navigationView"
-        app:itemTextColor="@color/black"
-        app:menu="@menu/drawermenu"
-        app:itemIconTint="@color/black"
-        android:layout_marginTop="-2dp"
-        app:itemTextAppearance="@style/MenuItem"/>
-
-
+        <android.support.design.widget.NavigationView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/navigationView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:layout_marginTop="-2dp"
+            app:itemIconTint="@color/black"
+            app:itemTextAppearance="@style/MenuItem"
+            app:itemTextColor="@color/black"
+            app:menu="@menu/drawermenu" />
 
     </android.support.v4.widget.DrawerLayout>
 

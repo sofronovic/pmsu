@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Meal {
 
-    private int id;
+    private long id;
     private String name;
     private String description;
     private double price;
@@ -22,6 +22,8 @@ public class Meal {
         this.photo = photo;
     }
 
+    public Meal(){}
+
     public Bitmap getPhoto() {
         return photo;
     }
@@ -30,11 +32,11 @@ public class Meal {
         this.photo = photo;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -1,6 +1,5 @@
 package sf22_2014.android_projekat_sf22_2014;
 
-import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,7 +16,6 @@ import android.view.SubMenu;
 import android.widget.TextView;
 
 import sf22_2014.android_projekat_sf22_2014.Font.CustomTypefaceSpan;
-import sf22_2014.android_projekat_sf22_2014.Fragment.TabFragment;
 import sf22_2014.android_projekat_sf22_2014.Fragment.TabRestaurantFragment;
 
 public class RestaurantActivity extends AppCompatActivity {
@@ -35,14 +33,11 @@ public class RestaurantActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_restaurant);
 
-
         title = (TextView) findViewById(R.id.r_title);
         description = (TextView) findViewById(R.id.r_description);
 
-
         title.setText(getIntent().getStringExtra("res_title"));
         description.setText(getIntent().getStringExtra("res_description"));
-
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
