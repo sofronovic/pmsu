@@ -2,6 +2,8 @@ package sf22_2014.android_projekat_sf22_2014.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +45,9 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolderMe
         Meal meal = mealList.get(position);
         holder.title.setText(meal.getName());
         holder.description.setText(meal.getDescription());
-        holder.imageView.setImageBitmap(meal.getPhoto());
+        File file = new File(meal.getPhoto());
+        Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+        holder.imageView.setImageBitmap(bitmap);
         holder.price.setText(String.valueOf(meal.getPrice()));
 
     }
@@ -88,6 +93,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MyViewHolderMe
             intent.putExtra("meal_name", meal.getName());
             intent.putExtra("meal_desc", meal.getDescription());
             intent.putExtra("meal_price", meal.getPrice());
+            intent.putExtra("meal_image", meal.getPhoto());
             this.mContext.startActivity(intent);
         }
 

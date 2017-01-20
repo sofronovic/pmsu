@@ -42,12 +42,12 @@ public class RestaurantActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         Menu m = navigationView.getMenu();
-        for (int i=0; i<m.size();i++){
+        for (int i = 0; i < m.size(); i++) {
             MenuItem mi = m.getItem(i);
 
             SubMenu subMenu = mi.getSubMenu();
-            if(subMenu!= null && subMenu.size() > 0){
-                for (int j = 0; j<subMenu.size();j++){
+            if (subMenu != null && subMenu.size() > 0) {
+                for (int j = 0; j < subMenu.size(); j++) {
                     MenuItem subMenuItem = subMenu.getItem(j);
                     applyFontToMenuItem(subMenuItem);
                 }
@@ -74,7 +74,7 @@ public class RestaurantActivity extends AppCompatActivity {
     protected void applyFontToMenuItem(MenuItem mi) {
         Typeface font = Typeface.createFromAsset(getAssets(), "Vintage Avalanche.otf");
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
-        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
 }

@@ -74,6 +74,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
         }
     }
 
+
     @Override
     public void onLocationChanged(Location location) {
         lastLocation = location;
@@ -83,29 +84,37 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
 
         restaurants = dbHelper.getAllUser();
         List<String> addresss = new ArrayList<>();
-        for (Restaurant r : restaurants){
+        List<String> names = new ArrayList<>();
+        for (Restaurant r : restaurants) {
             addresss.add(r.getAddress());
+        }
+        for (Restaurant n : restaurants) {
+            names.add(n.getName());
         }
 
         Geocoder gc = new Geocoder(getContext());
-        for(String i : addresss) {
-            try {
-                Marker restaurantMarker;
+        for (String i : addresss) {
+            for(String n : names) {
+                try {
+                    Marker restaurantMarker;
 
-                List<Address> list = gc.getFromLocationName(i, 1);
-                Address add = list.get(0);
-                String locality = add.getAddressLine(0);
-                double lat = add.getLatitude();
-                double lng = add.getLongitude();
-                LatLng latLng = new LatLng(lat, lng);
+                    List<Address> list = gc.getFromLocationName(i, 1);
+                    Address add = list.get(0);
+                    String locality = add.getAddressLine(0);
+                    double lat = add.getLatitude();
+                    double lng = add.getLongitude();
+                    LatLng latLng = new LatLng(lat, lng);
 
-                restaurantMarker = mGoogleMap.addMarker(new MarkerOptions().position(latLng).title("Restoran"));
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
+                    restaurantMarker = mGoogleMap.addMarker(new MarkerOptions().position(latLng).title("Restoran"));
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
 
-            } catch (IOException e) {
-                e.printStackTrace();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
+
         //Postavi marker na trenutnu lokaciju
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
@@ -116,7 +125,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
 
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(14));
-
     }
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -198,24 +206,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
                 //Zahtevaj dozvolu za lokaciju
                 checkLocationPermission();
             }
-        }
-        else {
+        } else {
             buildGoogleApiClient();
             mGoogleMap.setMyLocationEnabled(true);
         }
     }
 
-    protected synchronized void buildGoogleApiClient(){
+    protected synchronized void buildGoogleApiClient() {
         googleApiClient = new GoogleApiClient.Builder(getContext())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
         googleApiClient.connect();
-        }
+    }
 
     @Override
-    public void onConnected(Bundle bundle){
+    public void onConnected(Bundle bundle) {
         locationRequest = new LocationRequest();
         locationRequest.setInterval(1000);
         locationRequest.setFastestInterval(1000);
@@ -224,8 +231,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleA
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+        }
     }
 }
-    }
 
 

@@ -1,5 +1,6 @@
-package sf22_2014.android_projekat_sf22_2014.Database;//add your package name here example: package com.example.dbm;
+/*
 
+package sf22_2014.android_projekat_sf22_2014.Database;//add your package name here example: package com.example.dbm;
 //all required import files
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -1289,3 +1290,4 @@ public class AndroidDatabaseManager extends Activity implements OnItemClickListe
 	}
 
 }
+*/

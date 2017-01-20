@@ -33,7 +33,10 @@ public class MealsFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewMeals);
         dbHelper = MySQLiteHelper.getInstance(getContext().getApplicationContext());
 
-        mealAdapter = new MealAdapter(getContext(), dbHelper.getAllMeal());
+        long res_id = getActivity().getIntent().getLongExtra("res_id", 0);
+
+        mealAdapter = new MealAdapter(getContext(), dbHelper.getAllMealByResId(res_id));
+
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

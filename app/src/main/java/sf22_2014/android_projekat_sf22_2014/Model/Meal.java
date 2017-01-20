@@ -1,8 +1,6 @@
 package sf22_2014.android_projekat_sf22_2014.Model;
 
 
-import android.graphics.Bitmap;
-
 import java.util.List;
 
 public class Meal {
@@ -11,11 +9,11 @@ public class Meal {
     private String name;
     private String description;
     private double price;
-    private Bitmap photo;
+    private String photo;
     private Restaurant restaurant;
     private List<Tag> tags;
 
-    public Meal(int id, String name, String description, double price, Bitmap photo, Restaurant restaurant) {
+    public Meal(int id, String name, String description, double price, String photo, Restaurant restaurant) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -34,11 +32,11 @@ public class Meal {
         this.restaurant = restaurant;
     }
 
-    public Bitmap getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Bitmap photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 

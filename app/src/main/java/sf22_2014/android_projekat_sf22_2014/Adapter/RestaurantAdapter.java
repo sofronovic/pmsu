@@ -2,6 +2,8 @@ package sf22_2014.android_projekat_sf22_2014.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,24 +13,32 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import sf22_2014.android_projekat_sf22_2014.Database.MySQLiteHelper;
+import sf22_2014.android_projekat_sf22_2014.Filter.RestaurantFilter;
 import sf22_2014.android_projekat_sf22_2014.Model.Restaurant;
 import sf22_2014.android_projekat_sf22_2014.R;
 import sf22_2014.android_projekat_sf22_2014.RestaurantActivity;
 
-public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.MyViewHolder> {
+public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.MyViewHolder>  {
 
     //private Cursor cursor;
     private Context mContext;
     private List<Restaurant> restaurantList = new ArrayList<>();
     private LayoutInflater inflater;
+    MySQLiteHelper dbHelper;
+    RestaurantFilter restaurantFilter;
+    List<Restaurant> filteredRestaurantList;
 
-    public RestaurantAdapter(Context mContext, List<Restaurant> restaurantList1){
+    public RestaurantAdapter(Context mContext, List<Restaurant> restaurantList1) {
         this.mContext = mContext;
         this.restaurantList = restaurantList1;
+        this.filteredRestaurantList = restaurantList1;
         inflater = LayoutInflater.from(mContext);
+        restaurantFilter = new RestaurantFilter(restaurantList, this);
     }
 
     @Override
@@ -37,9 +47,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
                 .inflate(R.layout.restaurant_card, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(itemView, mContext, restaurantList);
         return viewHolder;
-/*
-        return new MyViewHolder(itemView, mContext, restaurantList);
-*/
     }
 
     @Override
@@ -47,7 +54,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
         Restaurant restaurant = restaurantList.get(position);
         holder.title.setText(restaurant.getName());
         holder.description.setText(restaurant.getDescription());
-        holder.imageView.setImageBitmap(restaurant.getSmallPhoto());
+
+        File imgFile = new File(restaurant.getSmallPhoto());
+        Bitmap bitmap1 = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        holder.imageView.setImageBitmap(bitmap1);
 
     }
 
@@ -56,7 +66,15 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
         return restaurantList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
+    public void setList(List<Restaurant> list){
+        this.filteredRestaurantList = list;
+    }
+
+    public void filterList(String text){
+        restaurantFilter.filter(text);
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView title, description;
         public ImageView imageView;
@@ -95,10 +113,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.My
             intent.putExtra("res_phone", restaurant.getPhone());
             intent.putExtra("res_email", restaurant.getEmail());
             intent.putExtra("res_address", restaurant.getAddress());
+            intent.putExtra("res_image", restaurant.getSmallPhoto());
             this.mContext.startActivity(intent);
             Log.d("RestaurantAdapter", "OnClick Recycler View");
 
+        }
+
+        public void setFilter(ArrayList<Restaurant> newList) {
+            restaurantList = new ArrayList<>();
+            restaurantList.addAll(newList);
+
+            notifyDataSetChanged();
+        }
     }
 
-    }
 }

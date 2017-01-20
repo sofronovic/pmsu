@@ -10,7 +10,7 @@ public class Restaurant implements Serializable{
     private long id;
     private String name;
     private String description;
-    private Bitmap smallPhoto;
+    private String smallPhoto;
     private Bitmap largePhoto;
     private String address;
     private int startHour;
@@ -22,7 +22,7 @@ public class Restaurant implements Serializable{
     private String url;
     private List<Meal> meals;
 
-    public Restaurant(String name, String description, Bitmap smallPhoto, int startHour, String url) {
+    public Restaurant(String name, String description, String smallPhoto, int startHour, String url) {
         this.name = name;
         this.description = description;
         this.smallPhoto = smallPhoto;
@@ -30,14 +30,14 @@ public class Restaurant implements Serializable{
         this.url = url;
     }
 
-    public Restaurant(int id, String name, String description, Bitmap smallPhoto) {
+    public Restaurant(int id, String name, String description, String smallPhoto) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.smallPhoto = smallPhoto;
     }
 
-    public Restaurant(int id, String name, String description, Bitmap smallPhoto, int startHour, int endHouse, String url) {
+    public Restaurant(int id, String name, String description, String smallPhoto, int startHour, int endHouse, String url) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -49,7 +49,7 @@ public class Restaurant implements Serializable{
     }
 
 
-    public Restaurant(int id, String name, String description, Bitmap smallPhoto,  String url, int startHour, int endHour,
+    public Restaurant(int id, String name, String description, String smallPhoto,  String url, int startHour, int endHour,
                       String phone, String email) {
         this.id = id;
         this.name = name;
@@ -61,7 +61,7 @@ public class Restaurant implements Serializable{
         this.phone = phone;
         this.email = email;
     }
-    public Restaurant(int id, String name, String description, Bitmap smallPhoto, String url, int startHour, int endHour,
+    public Restaurant(int id, String name, String description, String smallPhoto, String url, int startHour, int endHour,
                       String phone, String email, String address) {
         this.id = id;
         this.name = name;
@@ -77,7 +77,7 @@ public class Restaurant implements Serializable{
 
     public Restaurant(int id, List<Meal> meals, String url, String email, String phone, int startMinute,
                       int endMinute, int endHour, int startHour, String address, Bitmap largePhoto,
-                      Bitmap smallPhoto, String description, String name) {
+                      String smallPhoto, String description, String name) {
         this.id = id;
         this.meals = meals;
         this.url = url;
@@ -148,11 +148,11 @@ public class Restaurant implements Serializable{
         this.description = description;
     }
 
-    public Bitmap getSmallPhoto() {
+    public String getSmallPhoto() {
         return smallPhoto;
     }
 
-    public void setSmallPhoto(Bitmap smallPhoto) {
+    public void setSmallPhoto(String smallPhoto) {
         this.smallPhoto = smallPhoto;
     }
 

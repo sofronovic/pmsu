@@ -1,10 +1,14 @@
 package sf22_2014.android_projekat_sf22_2014;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -16,16 +20,16 @@ import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
-import android.view.View;
 import android.widget.TextView;
 
-import sf22_2014.android_projekat_sf22_2014.Database.AndroidDatabaseManager;
+import sf22_2014.android_projekat_sf22_2014.Adapter.RestaurantAdapter;
 import sf22_2014.android_projekat_sf22_2014.Database.MySQLiteHelper;
+import sf22_2014.android_projekat_sf22_2014.Filter.RestaurantFilter;
 import sf22_2014.android_projekat_sf22_2014.Font.CustomTypefaceSpan;
 import sf22_2014.android_projekat_sf22_2014.Fragment.RestaurantsFragment;
 import sf22_2014.android_projekat_sf22_2014.Fragment.TabFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     private MySQLiteHelper db;
     DrawerLayout drawerLayout;
@@ -33,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     TextView textView;
+    RestaurantAdapter adapter;
+    RestaurantFilter restaurantFilter;
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         textView = (TextView) findViewById(R.id.title);
-
         changeMenuItemFont();
         Typeface font = Typeface.createFromAsset(getAssets(), "bernadette.ttf");
         textView.setTypeface(font);
@@ -52,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.containerView, new TabFragment()).commit();
 
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.app_name, R.string.app_name);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
@@ -59,35 +73,43 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.drawerMenu_profile) {
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.containerView, new RestaurantsFragment()).commit();
+
                 }
                 if (item.getItemId() == R.id.drawerMenuSettings) {
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.containerView, new RestaurantsFragment()).commit();
+                    fragmentTransaction.replace(R.id.containerView, new PreferencesActivity()).commit();
+
                 }
                 return false;
             }
+
+
+
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.app_name, R.string.app_name);
-
-        toolbar.setOnClickListener(new View.OnClickListener() {
+        /*toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent dbmanager = new Intent(MainActivity.this, AndroidDatabaseManager.class);
                 startActivity(dbmanager);
             }
-        });
+        });*/
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
+        verifyStoragePermissions(this);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_item, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_item_thingy:
+            case R.id.drawerMenuSettings:
                 openPreferences();
                 return true;
             default:
@@ -123,5 +145,14 @@ public class MainActivity extends AppCompatActivity {
         mi.setTitle(mNewTitle);
     }
 
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        }
+    }
 
 }

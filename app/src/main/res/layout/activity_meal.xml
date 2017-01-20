@@ -13,7 +13,7 @@
     <ImageView
         android:id="@+id/meal_info_image"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="180dp"
         android:src="@drawable/slika1"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"/>
@@ -112,5 +112,77 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/orderLayout"
+            android:background="#e0e0e0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_below="@id/meal_info_order_layout"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:id="@+id/orderStatic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:textColor="@color/faded"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="8dp"
+                android:text="Your order is cooking..." />
+
+            <TextView
+                android:id="@+id/MealStatic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:layout_marginLeft="5dp"
+                android:text="Meal - "
+                android:textColor="@color/faded"
+                android:layout_below="@id/orderStatic"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/orderName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="19sp"
+                android:textColor="@color/button_red"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/orderStatic"
+                android:layout_toRightOf="@id/MealStatic"
+                />
+
+            <TextView
+                android:id="@+id/PriceStatic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:text="Price - "
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/faded"
+                android:layout_below="@id/MealStatic"
+                android:layout_marginTop="8dp"
+                />
+
+            <TextView
+                android:id="@+id/orderPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="19sp"
+                android:textColor="@color/button_red"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/orderName"
+                android:layout_toRightOf="@id/MealStatic"
+                android:layout_marginBottom="8dp"
+                />
+
+        </RelativeLayout>
+
     </RelativeLayout>
+
 </ScrollView>

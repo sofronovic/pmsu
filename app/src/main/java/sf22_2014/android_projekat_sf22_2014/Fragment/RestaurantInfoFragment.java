@@ -1,6 +1,8 @@
 package sf22_2014.android_projekat_sf22_2014.Fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
@@ -26,6 +28,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,7 +44,7 @@ public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallba
     private TextView title, description, days, address, startHour, endHour, site,
             siteStatic, facebook, faceBookstatic, features, drink, delivery;
     private Button button, buttonSMS, buttonEmail;
-    private ImageView openImage, closedImage;
+    private ImageView openImage, closedImage, mainImage;
     private String naslov;
 
     private Date date;
@@ -80,7 +83,7 @@ public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallba
         buttonEmail = (Button) view.findViewById(R.id.email);
         openImage = (ImageView) view.findViewById(R.id.res_info_open);
         closedImage = (ImageView) view.findViewById(R.id.res_info_closed);
-
+        mainImage = (ImageView) view.findViewById(R.id.res_info_imageView);
 
         naslov = getActivity().getIntent().getStringExtra("res_title");
         String opis = getActivity().getIntent().getStringExtra("res_description");
@@ -90,6 +93,7 @@ public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallba
         final String phone = getActivity().getIntent().getStringExtra("res_phone");
         final String email = getActivity().getIntent().getStringExtra("res_email");
         restaurantAddress = getActivity().getIntent().getStringExtra("res_address");
+        String image_path = getActivity().getIntent().getStringExtra("res_image");
 
         title.setText(naslov);
         description.setText(opis);
@@ -97,6 +101,10 @@ public class RestaurantInfoFragment extends Fragment implements OnMapReadyCallba
         startHour.setText("from: " + String.valueOf(start) + "h");
         endHour.setText("to: " + String.valueOf(end) + "h");
         address.setText(restaurantAddress);
+
+        File file = new File(image_path);
+        Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+        mainImage.setImageBitmap(bitmap);
 
         mMapView = (MapView) view.findViewById(R.id.google_map);
         mMapView.onCreate(savedInstanceState);
